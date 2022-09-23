@@ -1,30 +1,9 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
+import Page from '../components/Page';
 import Shorten from '../components/Shorten';
-import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <Head><title>URL shortener</title></Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>Shorten that URL</h1>
-        <Shorten />
-      </main>
-
-      <footer className={styles.footer}>
-        <a href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank" rel="noopener noreferrer">
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+  return <Page><Shorten /></Page>;
 }
 
-export default Home
+export default Home;

@@ -7,7 +7,7 @@ enum Status {
   Error,
 }
 
-const Shorten = () => {
+export default function Shorten () {
   const [url, setUrl] = useState('http://');
   const [shortUrl, setShortUrl] = useState('');
   const [status, setStatus] = useState<Status>(Status.EnteringURL);
@@ -49,15 +49,12 @@ const Shorten = () => {
 
   return <>
     <form onSubmit={getShortUrl}>
-      <input type='text' size={50} value={url} onChange={updateUrl} />
+      <input type='text' size={40} value={url} onChange={updateUrl} />
       <input type='submit' value='Shorten' />    
     </form>
-    { status === Status.EnteringURL ? null : 
-      status === Status.GettingShortURL ? <p>Shortening URL, please wait ...</p> :
+    { status === Status.EnteringURL ? <p>&nbsp;</p> : 
+      status === Status.GettingShortURL ? <p className='waiting'>Shortening URL, please wait ...</p> :
       status === Status.GotShortURL ? <p className='shortened'><a href={shortUrl} target='_blank' rel='noreferrer'>{shortUrl}</a></p> :
       <p className='error'>Oops. {error}</p> }
   </>;
-
 };
-  
-export default Shorten;
