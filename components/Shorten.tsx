@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 
 enum Status {
   EnteringURL,
@@ -8,7 +8,7 @@ enum Status {
 }
 
 export default function Shorten () {
-  const [url, setUrl] = useState('http://');
+  const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
   const [status, setStatus] = useState<Status>(Status.EnteringURL);
   const [error, setError] = useState('');
@@ -23,8 +23,7 @@ export default function Shorten () {
     setStatus(Status.GettingShortURL);
 
     const encodedUrl = encodeURIComponent(url);
-    let response: Response;
-    let data;
+    let data, response: Response;
 
     try {
       response = await fetch(`/api/shorten?url=${encodedUrl}`);
@@ -32,7 +31,7 @@ export default function Shorten () {
 
     } catch (e: any) {
       setStatus(Status.Error);
-      setError((e as Error).message);
+      setError(e.message);
       return;
     }
 
@@ -49,7 +48,7 @@ export default function Shorten () {
 
   return <>
     <form onSubmit={getShortUrl}>
-      <input type='text' size={40} value={url} onChange={updateUrl} />
+      <input type='text' size={40} value={url} onChange={updateUrl} placeholder='https://' />
       <input type='submit' value='Shorten' />    
     </form>
     { status === Status.EnteringURL ? <p>&nbsp;</p> : 

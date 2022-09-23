@@ -3,7 +3,7 @@ import { tokenFromId } from '../../shared/tokens';
 import withDbClient from '../../shared/withDbClient';
 import * as db from 'zapatos/db';
 
-type Data = { url: string; shortUrl: string; } | { error: string };
+type Data = { shortUrl: string; } | { error: string };
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,12 +15,13 @@ export default async function handler(
   try {
     void new URL(url);
   } catch {
-    return res.status(400).json({ error: 'That’s not a valid URL.' });
+    const country = req.headers['x-vercel-ip-country'];
+    return res.status(400).json({ error: 'That’s not a valid URL. ' + country });
   }
 
   const { id } = await withDbClient(dbClient => 
     db.upsert('urls', { url }, 'url', { returning: ['id'] }).run(dbClient)
   );
   const shortUrl = tokenFromId(id);
-  res.status(200).json({ url, shortUrl });
+  res.status(200).json({ shortUrl });
 }
