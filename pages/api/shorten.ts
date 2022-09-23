@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { tokenFromId } from '../shared/tokens';
+import { tokenFromId } from '../../shared/tokens';
+import withDbClient from '../../shared/withDbClient';
 import * as db from 'zapatos/db';
-import withDbClient from '../shared/withDbClient';
 
 type Data = { shortUrl: string; } | { error: string };
 
