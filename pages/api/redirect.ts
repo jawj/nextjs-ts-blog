@@ -7,8 +7,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  
+
   const notFound = () => res.redirect('/not-found');
+  
   const { token } = req.query;
   if (typeof token !== 'string' || token.length > 32) return notFound();
   

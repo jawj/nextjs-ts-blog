@@ -22,10 +22,9 @@ export default function Shorten () {
     e.preventDefault();
     setStatus(Status.GettingShortURL);
 
-    const encodedUrl = encodeURIComponent(url);
     let data, response: Response;
-
     try {
+      const encodedUrl = encodeURIComponent(url);
       response = await fetch(`/api/shorten?url=${encodedUrl}`);
       data = await response.json();
 
@@ -43,12 +42,12 @@ export default function Shorten () {
     
     const { protocol, host } = location;
     setStatus(Status.GotShortURL);
-    setShortUrl(`${protocol}//${host}/` + data.shortUrl);
+    setShortUrl(`${protocol}//${host}/` + data.token);
   };
 
   return <>
     <form onSubmit={getShortUrl}>
-      <input type='text' size={40} value={url} onChange={updateUrl} placeholder='https://' />
+      <input type='text' size={40} value={url} onChange={updateUrl} placeholder='https://example.com/url/to/be/shortened' />
       <input type='submit' value='Shorten' />    
     </form>
     { status === Status.EnteringURL ? <p>&nbsp;</p> : 
