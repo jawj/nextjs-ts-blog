@@ -3,23 +3,22 @@ import { idFromToken } from '../../shared/tokens';
 import withDbClient from '../../shared/withDbClient';
 import * as db from 'zapatos/db';
 
-type Data = { shortUrl: string; } | { error: string };
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse,
 ) {
+  
+  const notFound = () => res.redirect('/not-found');
   const { token } = req.query;
-  if (typeof token !== 'string') return res.status(400).json({ error: 'No token was supplied.' });
-  if (token.length > 32) return res.status(400).json({ error: 'Token is too long.' });
+  if (typeof token !== 'string' || token.length > 32) return notFound();
   
   const id = idFromToken(token);
-  if (isNaN(id)) return res.status(400).json({ error: 'Token isn’t valid.' });
-
+  if (isNaN(id)) return notFound();
+  
   const result = await withDbClient(dbClient => 
     db.selectOne('urls', { id }, { columns: ['url'] }).run(dbClient)
   );
-
-  if (result === undefined) return res.redirect('/not-found');
+  if (result === undefined) return notFound();
+  
   res.redirect(result.url);
 }

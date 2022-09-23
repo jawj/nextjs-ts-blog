@@ -9,14 +9,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  
   const { url } = req.query;
   if (typeof url !== 'string') return res.status(400).json({ error: 'Please provide a URL.' });
-  if (url.length > 4096) return res.status(400).json({ error: `That URL is too long.` });
+  if (url.length > 4096) return res.status(400).json({ error: 'That URL’s too long.' });
   try {
     void new URL(url);
   } catch {
-    const country = req.headers['x-vercel-ip-country'];
-    return res.status(400).json({ error: 'That’s not a valid URL. ' + country });
+    return res.status(400).json({ error: 'That’s not a valid URL.' });
   }
 
   const { id } = await withDbClient(dbClient => 
