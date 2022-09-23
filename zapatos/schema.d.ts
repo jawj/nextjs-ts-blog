@@ -23,112 +23,70 @@ declare module 'zapatos/schema' {
   /* --- tables --- */
 
   /**
-   * **x**
+   * **urls**
    * - Table in database
    */
-  export namespace x {
-    export type Table = 'x';
+  export namespace urls {
+    export type Table = 'urls';
     export interface Selectable {
       /**
-      * **x.id**
-      * - `int4` in database
-      * - `NOT NULL`, default: `nextval('x_id_seq'::regclass)`
+      * **urls.id**
+      * - `int8` in database
+      * - Generated column
       */
-    id: number;
+    id: db.Int8String;
       /**
-      * **x.name**
+      * **urls.url**
       * - `text` in database
-      * - Nullable, no default
+      * - `NOT NULL`, no default
       */
-    name: string | null;
-      /**
-      * **x.awesome**
-      * - `bool` in database
-      * - `NOT NULL`, default: `false`
-      */
-    awesome: boolean;
+    url: string;
     }
     export interface JSONSelectable {
       /**
-      * **x.id**
-      * - `int4` in database
-      * - `NOT NULL`, default: `nextval('x_id_seq'::regclass)`
+      * **urls.id**
+      * - `int8` in database
+      * - Generated column
       */
     id: number;
       /**
-      * **x.name**
+      * **urls.url**
       * - `text` in database
-      * - Nullable, no default
+      * - `NOT NULL`, no default
       */
-    name: string | null;
-      /**
-      * **x.awesome**
-      * - `bool` in database
-      * - `NOT NULL`, default: `false`
-      */
-    awesome: boolean;
+    url: string;
     }
     export interface Whereable {
       /**
-      * **x.id**
-      * - `int4` in database
-      * - `NOT NULL`, default: `nextval('x_id_seq'::regclass)`
+      * **urls.id**
+      * - `int8` in database
+      * - Generated column
       */
-    id?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
+    id?: (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn>;
       /**
-      * **x.name**
+      * **urls.url**
       * - `text` in database
-      * - Nullable, no default
+      * - `NOT NULL`, no default
       */
-    name?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
-      /**
-      * **x.awesome**
-      * - `bool` in database
-      * - `NOT NULL`, default: `false`
-      */
-    awesome?: boolean | db.Parameter<boolean> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, boolean | db.Parameter<boolean> | db.SQLFragment | db.ParentColumn>;
+    url?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
     }
     export interface Insertable {
       /**
-      * **x.id**
-      * - `int4` in database
-      * - `NOT NULL`, default: `nextval('x_id_seq'::regclass)`
-      */
-    id?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment;
-      /**
-      * **x.name**
+      * **urls.url**
       * - `text` in database
-      * - Nullable, no default
+      * - `NOT NULL`, no default
       */
-    name?: string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment;
-      /**
-      * **x.awesome**
-      * - `bool` in database
-      * - `NOT NULL`, default: `false`
-      */
-    awesome?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment;
+    url: string | db.Parameter<string> | db.SQLFragment;
     }
     export interface Updatable {
       /**
-      * **x.id**
-      * - `int4` in database
-      * - `NOT NULL`, default: `nextval('x_id_seq'::regclass)`
-      */
-    id?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.DefaultType | db.SQLFragment>;
-      /**
-      * **x.name**
+      * **urls.url**
       * - `text` in database
-      * - Nullable, no default
+      * - `NOT NULL`, no default
       */
-    name?: string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment>;
-      /**
-      * **x.awesome**
-      * - `bool` in database
-      * - `NOT NULL`, default: `false`
-      */
-    awesome?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment>;
+    url?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
     }
-    export type UniqueIndex = never;
+    export type UniqueIndex = 'urls_pkey';
     export type Column = keyof Selectable;
     export type OnlyCols<T extends readonly Column[]> = Pick<Selectable, T[number]>;
     export type SQLExpression = Table | db.ColumnNames<Updatable | (keyof Updatable)[]> | db.ColumnValues<Updatable> | Whereable | Column | db.ParentColumn | db.GenericSQLExpression;
@@ -138,20 +96,20 @@ declare module 'zapatos/schema' {
   /* --- aggregate types --- */
 
   export namespace public {  
-    export type Table = x.Table;
-    export type Selectable = x.Selectable;
-    export type JSONSelectable = x.JSONSelectable;
-    export type Whereable = x.Whereable;
-    export type Insertable = x.Insertable;
-    export type Updatable = x.Updatable;
-    export type UniqueIndex = x.UniqueIndex;
-    export type Column = x.Column;
+    export type Table = urls.Table;
+    export type Selectable = urls.Selectable;
+    export type JSONSelectable = urls.JSONSelectable;
+    export type Whereable = urls.Whereable;
+    export type Insertable = urls.Insertable;
+    export type Updatable = urls.Updatable;
+    export type UniqueIndex = urls.UniqueIndex;
+    export type Column = urls.Column;
   
-    export type AllBaseTables = [x.Table];
+    export type AllBaseTables = [urls.Table];
     export type AllForeignTables = [];
     export type AllViews = [];
     export type AllMaterializedViews = [];
-    export type AllTablesAndViews = [x.Table];
+    export type AllTablesAndViews = [urls.Table];
   }
 
 
@@ -179,35 +137,35 @@ declare module 'zapatos/schema' {
   /* === lookups === */
 
   export type SelectableForTable<T extends Table> = {
-    "x": x.Selectable;
+    "urls": urls.Selectable;
   }[T];
 
   export type JSONSelectableForTable<T extends Table> = {
-    "x": x.JSONSelectable;
+    "urls": urls.JSONSelectable;
   }[T];
 
   export type WhereableForTable<T extends Table> = {
-    "x": x.Whereable;
+    "urls": urls.Whereable;
   }[T];
 
   export type InsertableForTable<T extends Table> = {
-    "x": x.Insertable;
+    "urls": urls.Insertable;
   }[T];
 
   export type UpdatableForTable<T extends Table> = {
-    "x": x.Updatable;
+    "urls": urls.Updatable;
   }[T];
 
   export type UniqueIndexForTable<T extends Table> = {
-    "x": x.UniqueIndex;
+    "urls": urls.UniqueIndex;
   }[T];
 
   export type ColumnForTable<T extends Table> = {
-    "x": x.Column;
+    "urls": urls.Column;
   }[T];
 
   export type SQLForTable<T extends Table> = {
-    "x": x.SQL;
+    "urls": urls.SQL;
   }[T];
 
 }
