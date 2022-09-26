@@ -1,26 +1,30 @@
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, createRef, FormEvent, ChangeEvent } from 'react';
+import Image from 'next/image';
 
 enum Status {
-  EnteringURL,
-  GettingShortURL,
-  GotShortURL,
+  EnteringUrl,
+  GettingShortUrl,
+  GotShortUrl,
+  CopiedUrl,
   Error,
 }
 
 export default function Shorten () {
   const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
-  const [status, setStatus] = useState<Status>(Status.EnteringURL);
+  const [status, setStatus] = useState<Status>(Status.EnteringUrl);
   const [error, setError] = useState('');
+
+  const shortUrlInputRef = createRef<HTMLInputElement>();
   
   function updateUrl(e: ChangeEvent<HTMLInputElement>) {
     setUrl(e.target.value);
-    setStatus(Status.EnteringURL);
+    setStatus(Status.EnteringUrl);
   }
 
   async function getShortUrl(e: FormEvent) {
     e.preventDefault();
-    setStatus(Status.GettingShortURL);
+    setStatus(Status.GettingShortUrl);
 
     let data, response: Response;
     try {
@@ -41,18 +45,33 @@ export default function Shorten () {
     }
     
     const { protocol, host } = location;
-    setStatus(Status.GotShortURL);
+    setStatus(Status.GotShortUrl);
     setShortUrl(`${protocol}//${host}/` + data.token);
   };
+
+  function selectShortUrl() {
+    shortUrlInputRef.current!.select();
+  }
+
+  function copyShortUrl() {
+    selectShortUrl();
+    document.execCommand('copy');
+    setStatus(Status.CopiedUrl);
+  }
 
   return <>
     <form onSubmit={getShortUrl}>
       <input type='text' size={40} value={url} onChange={updateUrl} placeholder='https://example.com/url/to/be/shortened' />
       <input type='submit' value='Shorten' />    
     </form>
-    { status === Status.EnteringURL ? <p>&nbsp;</p> : 
-      status === Status.GettingShortURL ? <p className='waiting'>Shortening URL, please wait ...</p> :
-      status === Status.GotShortURL ? <p className='shortened'><a href={shortUrl} target='_blank' rel='noreferrer'>{shortUrl}</a></p> :
+    <div id='result'>
+    { status === Status.EnteringUrl ? null : 
+      status === Status.GettingShortUrl ? <p className='waiting'>Shortening URL, please wait ...</p> :
+      status === Status.GotShortUrl || status === Status.CopiedUrl ? <p className='shortened'>
+        <input type='text' value={shortUrl} ref={shortUrlInputRef} onClick={selectShortUrl} readOnly />{' '}
+        <Image src={status === Status.CopiedUrl ? '/check.svg' : '/copy.svg'} alt="Copy" width={20} height={24} onClick={copyShortUrl} />
+      </p> :
       <p className='error'>Oops. {error}</p> }
+    </div>
   </>;
 };

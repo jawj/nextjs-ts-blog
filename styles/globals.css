@@ -39,3 +39,29 @@ input {
   font: inherit;
   max-width: 75vw;
 }
+
+#result {
+  height: 3em;
+}
+
+.shortened {
+  text-align: center;
+}
+
+.shortened input {
+  border: 1px dotted #5d8;
+  width: 32ex;
+  text-align: center;
+  font-weight: bold;
+  color: #5d8;
+  position: relative;
+  top: -3px;
+}
+
+.shortened input:focus {
+  outline: none;
+}
+
+.shortened img {
+  cursor: pointer;
+}
