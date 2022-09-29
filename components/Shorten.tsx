@@ -66,7 +66,7 @@ export default function Shorten () {
     </form>
     <div id='result'>
     { status === Status.EnteringUrl ? null : 
-      status === Status.GettingShortUrl ? <p className='waiting'>Shortening URL, please wait ...</p> :
+      status === Status.GettingShortUrl ? <p className='waiting'><Image src='/puff.svg' alt='Loading' width={20} height={20} /> Shortening URL …</p> :
       status === Status.GotShortUrl || status === Status.CopiedUrl ? <p className='shortened'>
         <input type='text' value={shortUrl} ref={shortUrlInputRef} onClick={selectShortUrl} readOnly />{' '}
         <Image src={status === Status.CopiedUrl ? '/check.svg' : '/copy.svg'} alt="Copy" width={20} height={24} onClick={copyShortUrl} />

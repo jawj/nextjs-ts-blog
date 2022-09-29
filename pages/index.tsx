@@ -1,9 +1,11 @@
 import type { NextPage } from 'next';
-import Page from '../components/Page';
 import Shorten from '../components/Shorten';
 
 const Home: NextPage = () => {
-  return <Page><Shorten /></Page>;
+  return <>
+    <h1>Shorten that URL</h1>
+    <Shorten />
+  </>;
 }
 
 export default Home;

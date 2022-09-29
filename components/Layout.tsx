@@ -2,12 +2,14 @@ import { ReactNode } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-export default function Page({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return <>
-    <Head><title>URL shortener</title></Head>
+    <Head>
+      <title>URL shortener</title>
+      <link rel="icon" href="/favicon-32x32.png" type="image/png"/>
+    </Head>
 
     <main>
-      <h1>Shorten that URL</h1>
       {children}
     </main>
 
@@ -17,7 +19,7 @@ export default function Page({ children }: { children: ReactNode }) {
         <Image src="/neon.svg" alt="Neon logo" width={92} height={26} />
       </a>
       <a href="https://vercel.com" target="_blank" rel="noreferrer">
-        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+        <Image src="/vercel.svg" alt="Vercel logo" width={72} height={16} />
       </a>
     </footer>
   </>
