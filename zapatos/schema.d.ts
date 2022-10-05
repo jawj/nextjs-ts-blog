@@ -34,13 +34,49 @@ declare module 'zapatos/schema' {
       * - `int8` in database
       * - Generated column
       */
-    id: db.Int8String;
+      id: db.Int8String;
       /**
       * **urls.url**
       * - `text` in database
       * - `NOT NULL`, no default
       */
-    url: string;
+      url: string;
+      /**
+      * **urls.firstSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      firstSubmitted: Date;
+      /**
+      * **urls.lastSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      lastSubmitted: Date;
+      /**
+      * **urls.timesSubmitted**
+      * - `int4` in database
+      * - `NOT NULL`, default: `1`
+      */
+      timesSubmitted: number;
+      /**
+      * **urls.firstVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      firstVisited: Date | null;
+      /**
+      * **urls.lastVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      lastVisited: Date | null;
+      /**
+      * **urls.timesVisited**
+      * - `int4` in database
+      * - `NOT NULL`, default: `0`
+      */
+      timesVisited: number;
     }
     export interface JSONSelectable {
       /**
@@ -48,13 +84,49 @@ declare module 'zapatos/schema' {
       * - `int8` in database
       * - Generated column
       */
-    id: number;
+      id: number;
       /**
       * **urls.url**
       * - `text` in database
       * - `NOT NULL`, no default
       */
-    url: string;
+      url: string;
+      /**
+      * **urls.firstSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      firstSubmitted: db.TimestampTzString;
+      /**
+      * **urls.lastSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      lastSubmitted: db.TimestampTzString;
+      /**
+      * **urls.timesSubmitted**
+      * - `int4` in database
+      * - `NOT NULL`, default: `1`
+      */
+      timesSubmitted: number;
+      /**
+      * **urls.firstVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      firstVisited: db.TimestampTzString | null;
+      /**
+      * **urls.lastVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      lastVisited: db.TimestampTzString | null;
+      /**
+      * **urls.timesVisited**
+      * - `int4` in database
+      * - `NOT NULL`, default: `0`
+      */
+      timesVisited: number;
     }
     export interface Whereable {
       /**
@@ -62,13 +134,49 @@ declare module 'zapatos/schema' {
       * - `int8` in database
       * - Generated column
       */
-    id?: (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn>;
+      id?: (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (number | db.Int8String) | db.Parameter<(number | db.Int8String)> | db.SQLFragment | db.ParentColumn>;
       /**
       * **urls.url**
       * - `text` in database
       * - `NOT NULL`, no default
       */
-    url?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+      url?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.firstSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      firstSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.lastSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      lastSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.timesSubmitted**
+      * - `int4` in database
+      * - `NOT NULL`, default: `1`
+      */
+      timesSubmitted?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.firstVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      firstVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.lastVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      lastVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn>;
+      /**
+      * **urls.timesVisited**
+      * - `int4` in database
+      * - `NOT NULL`, default: `0`
+      */
+      timesVisited?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
     }
     export interface Insertable {
       /**
@@ -76,7 +184,43 @@ declare module 'zapatos/schema' {
       * - `text` in database
       * - `NOT NULL`, no default
       */
-    url: string | db.Parameter<string> | db.SQLFragment;
+      url: string | db.Parameter<string> | db.SQLFragment;
+      /**
+      * **urls.firstSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      firstSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment;
+      /**
+      * **urls.lastSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      lastSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment;
+      /**
+      * **urls.timesSubmitted**
+      * - `int4` in database
+      * - `NOT NULL`, default: `1`
+      */
+      timesSubmitted?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment;
+      /**
+      * **urls.firstVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      firstVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment;
+      /**
+      * **urls.lastVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      lastVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment;
+      /**
+      * **urls.timesVisited**
+      * - `int4` in database
+      * - `NOT NULL`, default: `0`
+      */
+      timesVisited?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment;
     }
     export interface Updatable {
       /**
@@ -84,7 +228,43 @@ declare module 'zapatos/schema' {
       * - `text` in database
       * - `NOT NULL`, no default
       */
-    url?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+      url?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+      /**
+      * **urls.firstSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      firstSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment>;
+      /**
+      * **urls.lastSubmitted**
+      * - `timestamptz` in database
+      * - `NOT NULL`, default: `now()`
+      */
+      lastSubmitted?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment>;
+      /**
+      * **urls.timesSubmitted**
+      * - `int4` in database
+      * - `NOT NULL`, default: `1`
+      */
+      timesSubmitted?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.DefaultType | db.SQLFragment>;
+      /**
+      * **urls.firstVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      firstVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment>;
+      /**
+      * **urls.lastVisited**
+      * - `timestamptz` in database
+      * - Nullable, no default
+      */
+      lastVisited?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | null | db.DefaultType | db.SQLFragment>;
+      /**
+      * **urls.timesVisited**
+      * - `int4` in database
+      * - `NOT NULL`, default: `0`
+      */
+      timesVisited?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.DefaultType | db.SQLFragment>;
     }
     export type UniqueIndex = 'urls_pkey' | 'urls_url_key';
     export type Column = keyof Selectable;
