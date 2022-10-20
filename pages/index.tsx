@@ -3,7 +3,7 @@ import Shorten from '../components/Shorten';
 
 const Home: NextPage = () => {
   return <>
-    <h1>Shorten that URL</h1>
+    <h1>Shorten That URL</h1>
     <Shorten />
   </>;
 }

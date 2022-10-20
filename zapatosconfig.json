@@ -1,1 +1,5 @@
-{ "db": { "connectionString": "{{DB_URL}}" } }
+{
+  "db": {
+    "connectionString": "{{DATABASE_URL}}"
+  }
+}

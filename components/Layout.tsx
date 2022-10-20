@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return <>
     <Head>
       <title>URL shortener</title>
-      <link rel="icon" href="/favicon-32x32.png" type="image/png"/>
+      <link rel="icon" href="/favicon-32x32.png" type="image/png" />
     </Head>
 
     <main>

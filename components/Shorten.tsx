@@ -9,14 +9,14 @@ enum Status {
   Error,
 }
 
-export default function Shorten () {
+export default function Shorten() {
   const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
   const [status, setStatus] = useState<Status>(Status.EnteringUrl);
   const [error, setError] = useState('');
 
   const shortUrlInputRef = createRef<HTMLInputElement>();
-  
+
   function updateUrl(e: ChangeEvent<HTMLInputElement>) {
     setUrl(e.target.value);
     setStatus(Status.EnteringUrl);
@@ -43,7 +43,7 @@ export default function Shorten () {
       setError(data.error);
       return;
     }
-    
+
     const { protocol, host } = location;
     setStatus(Status.GotShortUrl);
     setShortUrl(`${protocol}//${host}/` + data.token);
@@ -62,16 +62,16 @@ export default function Shorten () {
   return <>
     <form onSubmit={getShortUrl}>
       <input type='text' size={40} value={url} onChange={updateUrl} placeholder='https://example.com/url/to/be/shortened' />
-      <input type='submit' value='Shorten' />    
+      <input type='submit' value='Shorten' />
     </form>
     <div id='result'>
-    { status === Status.EnteringUrl ? null : 
-      status === Status.GettingShortUrl ? <p className='waiting'><Image src='/puff.svg' alt='Loading' width={20} height={20} /> Shortening URL …</p> :
-      status === Status.GotShortUrl || status === Status.CopiedUrl ? <p className='shortened'>
-        <input type='text' value={shortUrl} ref={shortUrlInputRef} onClick={selectShortUrl} readOnly />{' '}
-        <Image src={status === Status.CopiedUrl ? '/check.svg' : '/copy.svg'} alt="Copy" width={20} height={24} onClick={copyShortUrl} />
-      </p> :
-      <p className='error'>Oops. {error}</p> }
+      {status === Status.EnteringUrl ? null :
+        status === Status.GettingShortUrl ? <p className='waiting'><Image src='/puff.svg' alt='Loading' width={20} height={20} /> Shortening URL …</p> :
+          status === Status.GotShortUrl || status === Status.CopiedUrl ? <p className='shortened'>
+            <input type='text' value={shortUrl} ref={shortUrlInputRef} onClick={selectShortUrl} readOnly />{' '}
+            <Image src={status === Status.CopiedUrl ? '/check.svg' : '/copy.svg'} alt="Copy" width={20} height={24} onClick={copyShortUrl} />
+          </p> :
+            <p className='error'>Oops. {error}</p>}
     </div>
   </>;
 };

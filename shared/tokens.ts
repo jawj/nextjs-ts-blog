@@ -20,5 +20,5 @@ export function idFromToken(token: string) {
   return parseInt([...token.toLowerCase()]
     .map(pathChar => sourceChars.charAt(targetChars.indexOf(pathChar)))
     .join('')
-  , radix);
+    , radix);
 }
